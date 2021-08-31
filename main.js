@@ -54,7 +54,7 @@ removeButton.append("Remove")
 removeButton.classList.add("remove");
 article.append(removeButton);
 
-return article
+return article;
 }
 
 let mainElement = document.querySelector("main");
@@ -62,6 +62,37 @@ for (let index = 0; index < cars.length; index += 1) {
     let currentCar = cars[index];
     
     let article = createCarCard(currentCar)   
-
-mainElement.append(article);
+    mainElement.append(article);
 }
+
+
+function addCar(event) {
+event.preventDefault();    
+
+let form = event.target
+
+let vin = form.vin.value
+let make = form.make.value
+let model = form.model.value
+let color = form.color.value
+let price = form.price.value
+let year = form.year.value
+let doorNumber = form["door-number"].value
+
+let car = {
+    vin,
+    make,
+    model,
+    modelYear: year,
+    color,
+    price,
+    numberOfDoors: doorNumber,
+}
+console.log(car);
+cars.push(car);
+let carCardElement = createCarCard(car)
+mainElement.prepend(carCardElement)
+}
+
+let addCarForm = document.querySelector("form#add-car");
+addCarForm.addEventListener("submit", addCar);
